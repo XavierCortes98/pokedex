@@ -1,0 +1,32 @@
+.card {
+  -webkit-box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+.number {
+  display: flex;
+  align-self: flex-start;
+  color: var(--light-gray);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.picture {
+  background-color: var(--transparent-gray);
+}
+
+.name {
+  font-family: "flexo-demi", arial, sans-serif;
+}
+
+.grass {
+  background-color: #9bcc50;
+}
+
+.poison {
+  background-color: purple;
+}
+
+.fire {
+  background-color: red;
+}

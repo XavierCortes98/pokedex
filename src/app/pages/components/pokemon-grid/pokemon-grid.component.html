@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row">
+    <div
+      *ngFor="let pokemon of pokemonNumbers"
+      class="col-sm-12 col-md-6 col-lg-4 col-xl-3 p-2"
+    >
+      <app-pokemon-card [id]="pokemon"></app-pokemon-card>
+    </div>
+  </div>
+</div>
