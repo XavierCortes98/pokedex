@@ -1,8 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   --light-gray: #bbc6d4;
-  --transparent-gray: #F2F2F2;
+  --transparent-gray: #f2f2f2;
 
   --color-blue: #0066e4;
   --color-dark-blue: #004eae;
+
+  --grass-green: #9bcc50;
+  --venom-purple: #b97fc9;
+  --fire-red: #fd7d24;
+  --flying-blue: #3dc7ef;
+  --flying-gray: #bdb9b8;
+  --water-blue: #4592c4;
+  --bug-green: #729f3f;
+  --normal-gray: #a4acaf;
+  --electric-yellow: #eed535;
+  --ground-yellow: #f7de3f;
+  --ground-brown: #ab9842;
+  --pink-fairy: #fdb9e9;
+  --orange-fighting: #d56723;
+  --pink-pyschic: #f366b9;
+  --rock-brown: #a38c21;
+  --blue-ice: #51c4e7;
+  --ghost-purple: #7b62a3;
+  --blue-dragon: #53a4cf;
+  --orange-dragon: #f16e57;
+  --black-dark: #707070;
 }
