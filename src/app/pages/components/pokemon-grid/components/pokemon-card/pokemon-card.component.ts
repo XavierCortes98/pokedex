@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { cardInfo } from 'src/app/services/cardInfo/cardInfo.service';
+import { pokemonInfoService } from 'src/app/services/cardInfo/cardInfo.service';
 import { cardInfoModel } from 'src/app/models/cardInfo.model';
 
 @Component({
@@ -11,7 +11,7 @@ export class PokemonCardComponent implements OnInit {
   @Input() id: number | string = 'bulbasaur';
   card: cardInfoModel;
 
-  constructor(private cardService: cardInfo) {}
+  constructor(private cardService: pokemonInfoService) {}
 
   ngOnInit() {
     this.getPokemonById();

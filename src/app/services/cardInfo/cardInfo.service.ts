@@ -9,7 +9,7 @@ import { TypeType } from 'src/app/models/TypeType.model';
 @Injectable({
   providedIn: 'root',
 })
-export class cardInfo {
+export class pokemonInfoService {
   url: string = 'https://pokeapi.co/api/v2';
 
   constructor(private http: HttpClient) {}
