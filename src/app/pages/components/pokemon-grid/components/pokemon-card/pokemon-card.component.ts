@@ -1,19 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { pokemonInfoService } from 'src/app/services/cardInfo/cardInfo.service';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { cardInfoModel } from 'src/app/models/cardInfo.model';
+import { pokemonInfoService } from 'src/app/services/cardInfo/cardInfo.service';
 
 @Component({
   selector: 'app-pokemon-card',
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.css'],
 })
-export class PokemonCardComponent implements OnInit {
-  @Input() id: number | string = 'bulbasaur';
+export class PokemonCardComponent implements OnInit, OnChanges {
   card: cardInfoModel;
+
+  @Input() id: number | string;
 
   constructor(private cardService: pokemonInfoService) {}
 
   ngOnInit() {
+    this.getPokemonById();
+  }
+
+  ngOnChanges(): void {
     this.getPokemonById();
   }
 

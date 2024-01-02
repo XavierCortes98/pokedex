@@ -1,28 +1,61 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
+import { pokemonInfoService } from 'src/app/services/cardInfo/cardInfo.service';
+import { SearchType } from '../../../models/searchType.enum';
 
 @Component({
   selector: 'app-pokemon-grid',
   templateUrl: './pokemon-grid.component.html',
   styleUrls: ['./pokemon-grid.component.css'],
 })
-export class PokemonGridComponent {
+export class PokemonGridComponent implements OnInit {
+  searchType = SearchType.fetchAll;
+
   pokemonNumbers: number[];
-  currentPage: number = 1;
+  currentPage = 1;
+  pokemonNames: string[] = [];
 
-  @Input() maxPokemon: number = 12;
+  searchForm: FormGroup;
+  fillInput: Observable<string[]>;
 
-  constructor() {
+  pokemonName: string;
+
+  @Input() maxPokemon = 12;
+
+  public get searchTypeEnum(): typeof SearchType {
+    return SearchType;
+  }
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private pokemonInfoService: pokemonInfoService
+  ) {
     this.pokemonNumbers = Array.from(
       { length: this.maxPokemon },
       (_, i) => i + 1
     );
   }
 
+  ngOnInit() {
+    this.fecthAllPokemon();
+    this.createForm();
+    this.fillInput = this.searchForm.valueChanges.pipe(
+      startWith(''),
+      map(() => this._filter(this.searchForm.get('pokemonName')?.value))
+    );
+  }
+
+  createForm() {
+    this.searchForm = this.formBuilder.group({
+      pokemonName: [''],
+    });
+  }
+
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event): void {
     if (this.isScrollingNearBottom()) {
-      console.log('END');
-      this.loadMorePokemon();
+      // this.loadMorePokemon();
     }
   }
 
@@ -44,5 +77,35 @@ export class PokemonGridComponent {
     console.log('new: ', newPokemonNumbers);
     this.pokemonNumbers = [...this.pokemonNumbers, ...newPokemonNumbers];
     this.currentPage++;
+  }
+
+  fecthAllPokemon() {
+    for (let i = 1; i < 1025; i++) {
+      this.pokemonInfoService.getPokemonCardInfo(i).subscribe({
+        next: (data) => {
+          this.pokemonNames.push(data.name);
+        },
+        // complete: () => console.log('pokemon list: ', this.pokemonNames),
+      });
+    }
+  }
+
+  onSubmit() {
+    if (this.searchForm.get('pokemonName')?.value !== '') {
+      console.log(this.searchForm.get('pokemonName')?.value);
+      this.searchType = SearchType.byInput;
+      this.pokemonName = this.searchForm.get('pokemonName')?.value;
+    } else {
+      console.log(this.searchForm.get('pokemonName'));
+    }
+  }
+
+  private _filter(value: string): string[] {
+    console.log(value);
+    const formatVal = value.toLocaleLowerCase();
+
+    return this.pokemonNames.filter(
+      (pokemonName) => pokemonName.toLocaleLowerCase().indexOf(formatVal) === 0
+    );
   }
 }

@@ -1,10 +1,35 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      [matAutocomplete]="auto"
+      type="text"
+      formControlName="pokemonName"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let pokemon of fillInput | async" [value]="pokemon">
+        {{ pokemon }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button type="submit">
+    <mat-icon>search</mat-icon>
+  </button>
+</form>
+
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="searchType === searchTypeEnum.fetchAll">
     <div
       *ngFor="let pokemon of pokemonNumbers"
       class="col-sm-12 col-md-6 col-lg-4 col-xl-3 p-2"
     >
       <app-pokemon-card [id]="pokemon"></app-pokemon-card>
     </div>
+  </div>
+  <div *ngIf="searchType === searchTypeEnum.byInput">
+    <app-pokemon-card
+      class="col-sm-12 col-md-6 col-lg-4 col-xl-3 p-2"
+      [id]="pokemonName"
+    ></app-pokemon-card>
   </div>
 </div>

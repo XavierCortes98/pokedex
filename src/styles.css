@@ -27,3 +27,6 @@
   --orange-dragon: #f16e57;
   --black-dark: #707070;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
