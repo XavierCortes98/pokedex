@@ -1,22 +1,56 @@
-<div class="d-flex flex-column align-items-center card pb-3" *ngIf="card">
-  <picture class="d-flex justify-content-center w-100 rounded picture">
-    <img
-      class="img-fluid rounded w-100"
-      style="background-color: transparent"
-      src="{{ card.sprite }}"
-      alt=""
-    />
-  </picture>
+<div class="flex-column card pb-3" *ngIf="card">
+  <button (click)="flipCard()" class="position-absolute top-0 end-0 border-0">
+    <mat-icon>info</mat-icon>
+  </button>
 
-  <p class="number p-2">Nº. {{ getOrder(card.order) }}</p>
-  <h5 class="name">{{ getCaps(card.name) }}</h5>
-  <div class="d-flex">
-    <p
-      *ngFor="let item of card.types"
-      class="d-flex px-4 m-1 rounded type"
-      [ngClass]="item.name"
-    >
-      {{ getCaps(item.name) }}
-    </p>
+  <div class="d-flex flex-column align-items-center" *ngIf="!!isFront">
+    <picture class="d-flex justify-content-center w-100 rounded picture">
+      <img
+        class="img-fluid rounded w-100"
+        style="background-color: transparent"
+        src="{{ spriteFront }}"
+        alt=""
+      />
+    </picture>
+
+    <p class="number p-2">Nº. {{ getOrder(card.order) }}</p>
+    <h5 class="name">{{ getCaps(card.name) }}</h5>
+
+    <div class="d-flex">
+      <p
+        *ngFor="let item of card.types"
+        class="d-flex px-4 m-1 rounded type"
+        [ngClass]="item.name"
+      >
+        {{ getCaps(item.name) }}
+      </p>
+    </div>
+  </div>
+  <div *ngIf="!isFront">
+    <picture class="d-flex justify-content-center w-100 rounded picture">
+      <img
+        class="img-fluid rounded w-100"
+        style="background-color: transparent"
+        src="{{ spriteBack }}"
+        alt=""
+      />
+    </picture>
+    <div>
+      <div class="d-flex px-2 m-1 rounded gap-3">
+        <h5 class="title">Altura</h5>
+        <p class="info">{{ card.height }}</p>
+      </div>
+      <div class="d-flex px-2 m-1 rounded gap-3">
+        <h5 class="title">Peso</h5>
+        <p class="info">{{ card.weight }}</p>
+      </div>
+      <div class="d-flex px-2 m-1 rounded gap-3">
+        <h5 class="title">Ability</h5>
+        <p class="info">{{ getCaps(card.ability.name) }}</p>
+      </div>
+      <button (click)="setShiny()">
+        <mat-icon style="color: yellow">star</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

@@ -24,6 +24,14 @@
   width: fit-content;
 }
 
+.info {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.title {
+  font-family: "flexo-demi", arial, sans-serif;
+}
+
 .grass {
   background-color: var(--grass-green);
 }

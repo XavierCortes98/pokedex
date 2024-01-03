@@ -1,4 +1,4 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { cardInfoModel } from 'src/app/models/cardInfo.model';
@@ -10,7 +10,7 @@ import { TypeType } from 'src/app/models/TypeType.model';
   providedIn: 'root',
 })
 export class pokemonInfoService {
-  url: string = 'https://pokeapi.co/api/v2';
+  url = 'https://pokeapi.co/api/v2';
 
   constructor(private http: HttpClient) {}
 
@@ -23,15 +23,21 @@ export class pokemonInfoService {
   private mapCardInfo(response: Pokemon): cardInfoModel {
     return {
       id: response.id,
+      height: parseFloat((response.height * 0.1).toFixed(1)),
+      weight: response.weight,
       order: response.order,
       name: response.name,
+      ability: {
+        name: response.abilities[0].ability.name,
+        url: response.abilities[0].ability.url,
+      },
       types: this.mapTypes(response.types),
-      sprite: response.sprites.front_default,
+      sprite: response.sprites,
     };
   }
 
   private mapTypes(types: TypeElement[]): TypeType[] {
-    let typeArr: TypeType[] = [];
+    const typeArr: TypeType[] = [];
 
     types.forEach((element) => {
       typeArr.push(element.type);

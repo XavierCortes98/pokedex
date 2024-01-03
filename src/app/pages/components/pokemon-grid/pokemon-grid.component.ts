@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { pokemonInfoService } from 'src/app/services/cardInfo/cardInfo.service';
 import { SearchType } from '../../../models/searchType.enum';
@@ -53,9 +53,9 @@ export class PokemonGridComponent implements OnInit {
   }
 
   @HostListener('window:scroll', ['$event'])
-  onScroll(event: Event): void {
+  onScroll(): void {
     if (this.isScrollingNearBottom()) {
-      // this.loadMorePokemon();
+      this.loadMorePokemon();
     }
   }
 
@@ -83,7 +83,10 @@ export class PokemonGridComponent implements OnInit {
     for (let i = 1; i < 1025; i++) {
       this.pokemonInfoService.getPokemonCardInfo(i).subscribe({
         next: (data) => {
-          this.pokemonNames.push(data.name);
+          this.pokemonNames.push(
+            data.name.charAt(0).toLocaleUpperCase() +
+              data.name.slice(1).toLowerCase()
+          );
         },
         // complete: () => console.log('pokemon list: ', this.pokemonNames),
       });
@@ -92,16 +95,14 @@ export class PokemonGridComponent implements OnInit {
 
   onSubmit() {
     if (this.searchForm.get('pokemonName')?.value !== '') {
-      console.log(this.searchForm.get('pokemonName')?.value);
       this.searchType = SearchType.byInput;
       this.pokemonName = this.searchForm.get('pokemonName')?.value;
     } else {
-      console.log(this.searchForm.get('pokemonName'));
+      this.searchType = SearchType.fetchAll;
     }
   }
 
   private _filter(value: string): string[] {
-    console.log(value);
     const formatVal = value.toLocaleLowerCase();
 
     return this.pokemonNames.filter(
