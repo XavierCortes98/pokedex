@@ -1,3 +1,10 @@
+<div class="container">
+  <button (click)="flipCard()">click</button>
+  <div class="front" [ngClass]="isFront ? 'flipIn' : 'flipOut'">front</div>
+  <div class="back" [ngClass]="isFront ? 'flipOut' : 'flipIn'">Back</div>
+</div>
+
+<!-- 
 <div class="flex-column card pb-3" *ngIf="card">
   <button (click)="flipCard()" class="position-absolute top-0 end-0 border-0">
     <mat-icon>info</mat-icon>
@@ -53,4 +60,4 @@
       </button>
     </div>
   </div>
-</div>
+</div> -->

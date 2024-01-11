@@ -10,6 +10,7 @@ import { pokemonInfoService } from 'src/app/services/cardInfo/cardInfo.service';
 export class PokemonCardComponent implements OnInit, OnChanges {
   isFront = true;
   isShiny = false;
+  playAnimation = false;
 
   card: cardInfoModel;
 
