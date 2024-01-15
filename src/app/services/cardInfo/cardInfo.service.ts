@@ -25,7 +25,6 @@ export class pokemonInfoService {
       id: response.id,
       height: parseFloat((response.height * 0.1).toFixed(1)),
       weight: response.weight,
-      order: response.order,
       name: response.name,
       ability: {
         name: response.abilities[0].ability.name,

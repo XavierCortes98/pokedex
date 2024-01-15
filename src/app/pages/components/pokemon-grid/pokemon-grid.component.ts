@@ -38,8 +38,8 @@ export class PokemonGridComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fecthAllPokemon();
-    this.createForm();
+    // this.fecthAllPokemon();
+    // this.createForm();
     this.fillInput = this.searchForm.valueChanges.pipe(
       startWith(''),
       map(() => this._filter(this.searchForm.get('pokemonName')?.value))
@@ -70,9 +70,11 @@ export class PokemonGridComponent implements OnInit {
   }
 
   loadMorePokemon(): void {
+    const lastPokemonNumber =
+      this.pokemonNumbers[this.pokemonNumbers.length - 1];
     const newPokemonNumbers = Array.from(
       { length: this.maxPokemon },
-      (_, index) => this.currentPage * this.maxPokemon + index
+      (_, index) => lastPokemonNumber + 1 + index
     );
     console.log('new: ', newPokemonNumbers);
     this.pokemonNumbers = [...this.pokemonNumbers, ...newPokemonNumbers];

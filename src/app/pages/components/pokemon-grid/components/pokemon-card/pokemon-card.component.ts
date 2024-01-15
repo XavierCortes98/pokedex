@@ -1,3 +1,10 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { cardInfoModel } from 'src/app/models/cardInfo.model';
 import { pokemonInfoService } from 'src/app/services/cardInfo/cardInfo.service';
@@ -6,12 +13,19 @@ import { pokemonInfoService } from 'src/app/services/cardInfo/cardInfo.service';
   selector: 'app-pokemon-card',
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.css'],
+  animations: [
+    trigger('flipState', [
+      state('front', style({ transform: 'none' })),
+      state('back', style({ transform: 'rotateY(180deg)' })),
+      transition('*=>*', animate('300ms')),
+    ]),
+  ],
 })
 export class PokemonCardComponent implements OnInit, OnChanges {
   isFront = true;
   isShiny = false;
   playAnimation = false;
-
+  flip = 'front';
   card: cardInfoModel;
 
   spriteFront: string;
@@ -58,7 +72,7 @@ export class PokemonCardComponent implements OnInit, OnChanges {
   }
 
   flipCard() {
-    this.isFront = !this.isFront;
+    this.flip = this.flip == 'front' ? 'back' : 'front';
   }
 
   setShiny() {

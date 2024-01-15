@@ -1,14 +1,60 @@
-<div class="container">
-  <button (click)="flipCard()">click</button>
-  <div class="front" [ngClass]="isFront ? 'flipIn' : 'flipOut'">front</div>
-  <div class="back" [ngClass]="isFront ? 'flipOut' : 'flipIn'">Back</div>
+<div *ngIf="card" class="scene">
+  <div class="card" [@flipState]="flip">
+    <!-- Front card -->
+    <div class="card__face card__face--front">
+      <button (click)="flipCard()">click</button>
+      <div class="info">
+        <picture class="d-flex justify-content-center w-100 rounded picture">
+          <img
+            class="img-fluid rounded w-100"
+            style="background-color: transparent"
+            src="{{ spriteFront }}"
+            alt=""
+          />
+        </picture>
+        <p class="number p-2">Nº. {{ getOrder(card.id) }}</p>
+        <h5 class="name">{{ getCaps(card.name) }}</h5>
+        <div class="d-flex justify-content-center">
+          <p
+            *ngFor="let item of card.types"
+            class="d-flex px-4 m-1 rounded type"
+            [ngClass]="item.name"
+          >
+            {{ getCaps(item.name) }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Back Card -->
+    <div class="card__face card__face--back">
+      <button (click)="flipCard()">click</button>
+      <div class="info">
+        <picture class="d-flex justify-content-center w-100 rounded picture">
+          <img
+            class="img-fluid rounded w-100"
+            style="background-color: transparent"
+            src="{{ spriteBack }}"
+            alt=""
+          />
+        </picture>
+        <div class="d-flex px-2 m-1 rounded gap-3">
+          <h5 class="title">Peso</h5>
+          <p class="info">{{ card.weight }}</p>
+        </div>
+        <div class="d-flex px-2 m-1 rounded gap-3">
+          <h5 class="title">Ability</h5>
+          <p class="info">{{ getCaps(card.ability.name) }}</p>
+        </div>
+        <button (click)="setShiny()">
+          <mat-icon style="color: yellow">star</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- 
-<div class="flex-column card pb-3" *ngIf="card">
-  <button (click)="flipCard()" class="position-absolute top-0 end-0 border-0">
-    <mat-icon>info</mat-icon>
-  </button>
+<div class="flex-column card pb-3" *ngIf="card">  
 
   <div class="d-flex flex-column align-items-center" *ngIf="!!isFront">
     <picture class="d-flex justify-content-center w-100 rounded picture">
