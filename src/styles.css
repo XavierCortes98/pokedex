@@ -3,6 +3,8 @@
   --light-gray: #bbc6d4;
   --transparent-gray: #f2f2f2;
 
+  --light-blue: #3d8def;
+
   --color-blue: #0066e4;
   --color-dark-blue: #004eae;
 
@@ -28,5 +30,11 @@
   --black-dark: #707070;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

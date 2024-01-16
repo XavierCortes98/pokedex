@@ -38,8 +38,8 @@ export class PokemonGridComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.fecthAllPokemon();
-    // this.createForm();
+    this.fecthAllPokemon();
+    this.createForm();
     this.fillInput = this.searchForm.valueChanges.pipe(
       startWith(''),
       map(() => this._filter(this.searchForm.get('pokemonName')?.value))

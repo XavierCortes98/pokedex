@@ -2,8 +2,10 @@
   <div class="card" [@flipState]="flip">
     <!-- Front card -->
     <div class="card__face card__face--front">
-      <button (click)="flipCard()">click</button>
-      <div class="info">
+      <button (click)="flipCard()" class="buttonInfo w-100 text-end">
+        <mat-icon>info</mat-icon>
+      </button>
+      <div class="d-flex info">
         <picture class="d-flex justify-content-center w-100 rounded picture">
           <img
             class="img-fluid rounded w-100"
@@ -27,8 +29,10 @@
     </div>
     <!-- Back Card -->
     <div class="card__face card__face--back">
-      <button (click)="flipCard()">click</button>
-      <div class="info">
+      <button (click)="flipCard()" class="buttonInfo w-100 text-end">
+        <mat-icon>info</mat-icon>
+      </button>
+      <div>
         <picture class="d-flex justify-content-center w-100 rounded picture">
           <img
             class="img-fluid rounded w-100"
@@ -43,7 +47,7 @@
         </div>
         <div class="d-flex px-2 m-1 rounded gap-3">
           <h5 class="title">Ability</h5>
-          <p class="info">{{ getCaps(card.ability.name) }}</p>
+          <p>{{ getCaps(card.ability.name) }}</p>
         </div>
         <button (click)="setShiny()">
           <mat-icon style="color: yellow">star</mat-icon>

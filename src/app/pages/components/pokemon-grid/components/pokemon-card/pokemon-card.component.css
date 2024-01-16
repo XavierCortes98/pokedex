@@ -4,6 +4,7 @@
   min-width: 200px;
   margin: auto auto 1rem;
 }
+
 .card {
   transform-style: preserve-3d;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -19,7 +20,7 @@
 
 .card__face .info {
   position: relative;
-  padding: 1rem;
+  padding: 16px;
   background: white;
   display: flex;
   flex-direction: column;
@@ -37,13 +38,11 @@
   transform: rotateY(180deg);
 }
 
-/* .card {
+.card {
   -webkit-box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.15);
   box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.15);
-  width: 200px;
-  height: 400px;
-} */
+}
 
 .number {
   display: flex;
@@ -65,12 +64,18 @@
   width: fit-content;
 }
 
-.info {
+.pkmnInfo {
   font-family: "Courier New", Courier, monospace;
 }
 
 .title {
   font-family: "flexo-demi", arial, sans-serif;
+}
+
+.buttonInfo {
+  background-color: transparent;
+  border: none;
+  color: var(--light-blue);
 }
 
 .grass {
