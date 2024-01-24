@@ -2,9 +2,16 @@
   <div class="card" [@flipState]="flip">
     <!-- Front card -->
     <div class="card__face card__face--front">
-      <button (click)="flipCard()" class="buttonInfo w-100 text-end">
-        <mat-icon>info</mat-icon>
-      </button>
+      <div class="d-flex flex-row">
+        <button (click)="flipCard()" class="buttonInfo text-start me-auto">
+          <mat-icon>info</mat-icon>
+        </button>
+
+        <button (click)="setShiny()" class="buttonInfo text-end ms-auto">
+          <mat-icon style="color: yellow">star</mat-icon>
+        </button>
+      </div>
+
       <div class="d-flex info">
         <picture class="d-flex justify-content-center w-100 rounded picture">
           <img
@@ -29,10 +36,17 @@
     </div>
     <!-- Back Card -->
     <div class="card__face card__face--back">
-      <button (click)="flipCard()" class="buttonInfo w-100 text-end">
-        <mat-icon>info</mat-icon>
-      </button>
-      <div>
+      <div class="d-flex flex-row">
+        <button (click)="flipCard()" class="buttonInfo text-start me-auto">
+          <mat-icon>info</mat-icon>
+        </button>
+
+        <button (click)="setShiny()" class="buttonInfo text-end ms-auto">
+          <mat-icon style="color: yellow">star</mat-icon>
+        </button>
+      </div>
+
+      <div class="d-flex flex-column">
         <picture class="d-flex justify-content-center w-100 rounded picture">
           <img
             class="img-fluid rounded w-100"
@@ -41,17 +55,16 @@
             alt=""
           />
         </picture>
-        <div class="d-flex px-2 m-1 rounded gap-3">
+
+        <div class="d-flex rounded gap-3">
           <h5 class="title">Peso</h5>
-          <p class="info">{{ card.weight }}</p>
+          <p class="pkmnInfo">{{ card.weight }}</p>
         </div>
-        <div class="d-flex px-2 m-1 rounded gap-3">
+
+        <div class="d-flex rounded gap-3">
           <h5 class="title">Ability</h5>
           <p>{{ getCaps(card.ability.name) }}</p>
         </div>
-        <button (click)="setShiny()">
-          <mat-icon style="color: yellow">star</mat-icon>
-        </button>
       </div>
     </div>
   </div>
